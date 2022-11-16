@@ -22,5 +22,5 @@ app.use('/v1', require('./src/routes'));
 
 //const PORT = 4001;
 app.listen(process.env.PORT, ()=> console.log('The server is alive') );
-app.get('/',()=> console.log('Hello world'));
+app.get('/',(req,res)=> res.send('Hello world'));
 ///////////////////////////////////
