@@ -9,7 +9,6 @@ function getTokenFromHeader(req){
     return null
 }
 
-
 const auth = {
     requerido:jwt({
         secret:process.env.SECRET,
