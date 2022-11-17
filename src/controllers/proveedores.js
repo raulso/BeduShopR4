@@ -25,7 +25,7 @@ function obtenerProveedores2(req, res){
     Proveedor.find(query,
         function(err, result) {
             if (err) {
-              res.status(404).send({mesagge:"No se encontro el registro solicitado"});
+              res.status(404).send({mesagge:"No se encontro proveedor"});
             } else {
                  res.status(200).send(result)
             }

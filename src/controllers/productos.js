@@ -20,14 +20,15 @@ function obtenerProductos(req, res){
 
 function obtenerProductos2(req, res){
     const pid = req.params.pid;
-    const query = {   '_id': pid  }
+    const query = {  '_id': pid  }
     Producto.find(query,function(err, result) {
         if (err) {
-          res.status(404).send({mesagge:"No se encontro el registro solicitado"});
+          res.status(404).send({mesagge:"No se encontro producto"});
         } else {
              res.status(200).send(result)
-        }
+         }
       })
+
     //.then(data => res.status(200).send(data))
 }
 //patch
