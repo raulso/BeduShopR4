@@ -6,7 +6,10 @@ const ProductoSchema = mongoose.Schema({
         unique: true,
         required:true
     },
-    descripcion: String,
+    descripcion:{
+        type: String, 
+        required: true
+    },
     recomendacion:{
         type: String, 
         required: true

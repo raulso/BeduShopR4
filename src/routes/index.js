@@ -6,5 +6,6 @@ router.get('/', (req, res)=>{
 
 router.use('/productos',require('./producto'));
 router.use('/usuarios',require('./usuario'));
+router.use('/proveedores',require('./proveedor'));
 // exportamos nuestro nuevo router
 module.exports = router;

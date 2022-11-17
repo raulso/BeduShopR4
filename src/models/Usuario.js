@@ -29,7 +29,7 @@ const SchemaUsuario = mongoose.Schema({
     tarjeta:String,
     tipo:{  
         type:String,
-        enum:['Vendedor', 'Comprador']
+        enum:['Administrador','Supervisor', 'Usuario']
     },
 
 }, {timestamp:true})
@@ -41,7 +41,6 @@ SchemaUsuario.methods.crearContrasena = function(password){
     .pbkdf2Sync(password, this.salt, 10000, 512, "sha512")
     .toString("hex")
 }
-
 SchemaUsuario.methods.validarContrasena = function(password){
     const pass = crypto
     .pbkdf2Sync(password, this.salt, 10000, 512, "sha512")

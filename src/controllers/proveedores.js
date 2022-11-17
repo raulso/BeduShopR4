@@ -1,36 +1,36 @@
-const Producto = require('../models/Producto')
+const Proveedor = require('../models/Proveedor')
 
 // CREATE
-async function crearProducto(req, res){
+async function crearProveedor(req, res){
     const info = req.body;
-    const nombreProd = req.body.nombreProducto;
-    const validaRegistro = await Producto.findOne({nombreProducto:nombreProd})
+    const nombreProv = req.body.nombreproveedor;
+    const validaRegistro = await Proveedor.findOne({nombreproveedor:nombreProv})
     if(!validaRegistro){
-        const prod = new Producto(info)
+        const prod = new Proveedor(info)
         prod.save()
         .then(data => res.send(data))
     }else{
-         return  res.send({mesagge:`Ya existe el Producto ${nombreProd}`})
+         return  res.send({mesagge:`Ya existe el Proveedor ${nombreProv}`})
     }
 }
 
 // READ
-function obtenerProductos(req, res){
-    Producto.find()
+function obtenerProveedores(req, res){
+    Proveedor.find()
     .then(data => res.status(200).send(data))
 }
 
-function obtenerProductos2(req, res){
+function obtenerProveedores2(req, res){
     const pid = req.params.pid;
-    const query = {   '_id': pid  }
-    Producto.find(query)
+    const query = { '_id': pid  }
+    Proveedor.find(query)
     .then(data => res.status(200).send(data))
 }
 
 //patch
 async  function updateP(req, res){
    const pid = req.params.pid;
-   const productoss = await Producto.findById(pid);
+   const productoss = await Proveedor.findById(pid);
    if(!productoss){
         return  res.status(404).send({mesagge:"No se encontro el producto"})
    }
@@ -45,37 +45,36 @@ async  function updateP(req, res){
 }
 
 // DELETE
-async function eliminarProducto(req,res){
+async function eliminarProveedor(req,res){
     const id = req.body.id;
-    const resultado = await Producto.findByIdAndDelete(id)
-    .then(data => res.send({mesagge:`Producto ${id} borrado exitosamente`}))
+    const resultado = await Proveedor.findByIdAndDelete(id)
+    .then(data => res.send({mesagge:`Proveedor ${id} borrado exitosamente`}))
     .catch(err => res.status(500).send(err))
     if(!resultado){
-        return  res.status(404).send({mesagge:"No se encontro el producto"})
+        return  res.status(404).send({mesagge:"No se encontro Proveedor"})
     }
 }
-// UPDATE
-
-function modificarProducto(req, res){
+//UPDATE
+async function modificarProveedor(req, res){
     const pid = req.params.pid;
     const info = req.body;
-    Producto.findByIdAndUpdate(pid, info,
+    Proveedor.findByIdAndUpdate(pid, info,
         function(err, result) {
             if (err) {
               res.send({mesagge:"No se encontro el producto"});
             } else {
-                 Producto.findById(pid)
+                Proveedor.findById(pid)
                 .then(filtro => res.send(filtro))
             }
           })
-   }
+}
 
 module.exports = {
-    crearProducto,
-    modificarProducto,
-    eliminarProducto,
-    obtenerProductos,
-    obtenerProductos2,
+    crearProveedor,
+    modificarProveedor,
+    eliminarProveedor,
+    obtenerProveedores,
+    obtenerProveedores2,
     updateP
 }
 

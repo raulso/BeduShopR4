@@ -10,7 +10,7 @@ const {
 
 
 routerP.post('/', crearProducto)
-routerP.put('/:nombre', modificarProducto)
+routerP.put('/:pid', modificarProducto)
 routerP.delete('/', eliminarProducto)
 routerP.get('/', obtenerProductos)
 routerP.get('/:pid', obtenerProductos2)

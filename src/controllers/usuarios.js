@@ -18,14 +18,23 @@ function login(req, res){
 
 }
 
-function agregarUsuario(req,res){
-    const usuario = new Usuario(req.body)
-    const pass = req.body.password
-   
-    usuario.crearContrasena(pass);
-    usuario.save()
-    .then(data => res.status(200).send(data))
+async function agregarUsuario(req,res){
+    const email = req.body.email;
+    const validaRegistro = await Usuario.find({ $or: [ { email:req.body.email }, { nombre:req.body.nombre },{ username:req.body.username } ] })
+    if(validaRegistro.length === 0){
+        const usuario = new Usuario(req.body)
+        const pass = req.body.password
+        usuario.crearContrasena(pass);
+        usuario.save()
+        .then(data => res.status(200).send(data))
+    }else{
+         return  res.send({mesagge:`Ya existe usuario con email ${email}`})
+    }
     //.then(data => res.status(200).send(data.publicData()))
+
+
+
+
 
 }
 
