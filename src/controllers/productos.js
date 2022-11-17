@@ -8,9 +8,9 @@ async function crearProducto(req, res){
     if(!validaRegistro){
         const prod = new Producto(info)
         prod.save()
-        .then(data => res.send(data))
+        .then(data => res.status(200).send(data))
     }else{
-         return  res.send({mesagge:`Ya existe el Producto ${nombreProd}`})
+         return  res.status(404).send({mesagge:`Ya existe el Producto ${nombreProd}`})
     }
 }
 
@@ -48,7 +48,7 @@ async  function updateP(req, res){
 async function eliminarProducto(req,res){
     const id = req.body.id;
     const resultado = await Producto.findByIdAndDelete(id)
-    .then(data => res.send({mesagge:`Producto ${id} borrado exitosamente`}))
+    .then(data => res.status(200).send({mesagge:`Producto ${id} borrado exitosamente`}))
     .catch(err => res.status(500).send(err))
     if(!resultado){
         return  res.status(404).send({mesagge:"No se encontro el producto"})
@@ -62,10 +62,10 @@ function modificarProducto(req, res){
     Producto.findByIdAndUpdate(pid, info,
         function(err, result) {
             if (err) {
-              res.send({mesagge:"No se encontro el producto"});
+              res.status(404).send({mesagge:"No se encontro el producto"});
             } else {
                  Producto.findById(pid)
-                .then(filtro => res.send(filtro))
+                .then(filtro => res.status(200).send(filtro))
             }
           })
    }

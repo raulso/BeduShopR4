@@ -8,9 +8,9 @@ async function crearProveedor(req, res){
     if(!validaRegistro){
         const prod = new Proveedor(info)
         prod.save()
-        .then(data => res.send(data))
+        .then(data => res.status(200).send(data))
     }else{
-         return  res.send({mesagge:`Ya existe el Proveedor ${nombreProv}`})
+         return  res.status(404).send({mesagge:`Ya existe el Proveedor ${nombreProv}`})
     }
 }
 
@@ -48,7 +48,7 @@ async  function updateP(req, res){
 async function eliminarProveedor(req,res){
     const id = req.body.id;
     const resultado = await Proveedor.findByIdAndDelete(id)
-    .then(data => res.send({mesagge:`Proveedor ${id} borrado exitosamente`}))
+    .then(data => res.status(200).send({mesagge:`Proveedor ${id} borrado exitosamente`}))
     .catch(err => res.status(500).send(err))
     if(!resultado){
         return  res.status(404).send({mesagge:"No se encontro Proveedor"})
@@ -61,10 +61,10 @@ async function modificarProveedor(req, res){
     Proveedor.findByIdAndUpdate(pid, info,
         function(err, result) {
             if (err) {
-              res.send({mesagge:"No se encontro el producto"});
+              res.status(404).send({mesagge:"No se encontro el producto"});
             } else {
                 Proveedor.findById(pid)
-                .then(filtro => res.send(filtro))
+                .then(filtro => res.status(200).send(filtro))
             }
           })
 }
