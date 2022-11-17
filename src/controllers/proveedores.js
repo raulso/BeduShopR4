@@ -53,12 +53,20 @@ async  function updateP(req, res){
 // DELETE
 async function eliminarProveedor(req,res){
     const id = req.body.id;
-    const resultado = await Proveedor.findByIdAndDelete(id)
-    .then(data => res.status(200).send({mesagge:`Proveedor ${id} borrado exitosamente`}))
-    .catch(err => res.status(500).send(err))
+    const resultado = await Proveedor.find({"_id":id})
+    if(resultado.length > 0){
+        const resultado = await Proveedor.findByIdAndDelete(id)
+        .then(data => res.status(200).send({mesagge:`Proveedor ${id} borrado exitosamente`}))
+        .catch(err => res.status(500).send(err))
+   }else{
+        res.status(404).send({mesagge:"No se encontro id"})
+   }
+ 
+    
+   /* console.log(resultado);
     if(!resultado){
         return  res.status(404).send({mesagge:"No se encontro Proveedor"})
-    }
+    }*/
 }
 //UPDATE
 async function modificarProveedor(req, res){
