@@ -5,7 +5,7 @@ function login(req, res){
     const pass = req.body.pass;
 
     passport.authenticate('local', {session:false},(err,user,info)=> {
-        if(err) return err//res.send(err)
+        if(err) return err
         if(user){
             user.token = user.generaJWT();
             return res.json({user:user.toAuthJSON()})
@@ -15,7 +15,6 @@ function login(req, res){
         
 
     })(req,res)
-
 }
 
 async function agregarUsuario(req,res){
@@ -30,12 +29,6 @@ async function agregarUsuario(req,res){
     }else{
          return  res.send({mesagge:`Ya existe usuario con email ${email}`})
     }
-    //.then(data => res.status(200).send(data.publicData()))
-
-
-
-
-
 }
 
 function obtenerUsuarios(req,res){

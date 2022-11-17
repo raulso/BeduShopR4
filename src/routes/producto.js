@@ -8,7 +8,6 @@ const {
   updateP
 } = require('../controllers/productos')
 
-
 routerP.post('/', crearProducto)
 routerP.put('/:pid', modificarProducto)
 routerP.delete('/', eliminarProducto)

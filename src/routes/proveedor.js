@@ -8,7 +8,6 @@ const {
   updateP
 } = require('../controllers/proveedores')
 
-
 routerProve.post('/', crearProveedor)
 routerProve.put('/:pid', modificarProveedor)
 routerProve.delete('/', eliminarProveedor)
